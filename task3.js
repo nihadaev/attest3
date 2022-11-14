@@ -9,7 +9,7 @@ console.log(time())
 class Message {
     constructor(author, message){
         this.author = author;
-        this.time = gettime();
+        this.time = time();
         this.message = message;
     }
     toHtml(){
@@ -25,7 +25,10 @@ class Messenger{
     }
     show_history(){
         this.messages.forEach(message => {
-            return message.toHtml();
+            const p = document.createElement('p')
+            let text = message.toHtml()
+            p.textContent = `${text}`
+            history.append(p)
         });
     }
 }
@@ -33,7 +36,6 @@ class Messenger{
 let messenger = new Messenger();
 messenger.send('Nihad', 'hello');
 messenger.send('Renar', 'hiii');
-messenger.show_history();
 
 const history = document.querySelector('.history')
 const name1 = document.querySelector('.name')
@@ -54,11 +56,7 @@ btn_send.addEventListener('click', (e) => {
 
 btn_show.addEventListener('click', (e) => {
     e.preventDefault();
-
-    messenger.messages.forEach((message) => {
-        const p = document.createElement('p')
-        let text = message.toHtml()
-        p.textContent = `${text}`
-        history.append(p)
-    })
+    
+messenger.show_history();
+    
 })
