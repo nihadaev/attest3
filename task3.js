@@ -13,7 +13,7 @@ class Message {
         this.message = message;
     }
     toHtml(){
-        return `${this.time} ${this.author}: ${this.message}`;
+        return `<p> ${this.time} ${this.author}: ${this.message} </p>`;
     }
 }
 
@@ -24,11 +24,11 @@ class Messenger{
         this.messages.push(new Message(author, text));
     }
     show_history(){
+        const history = document.querySelector('.history')
+        
         this.messages.forEach(message => {
-            const p = document.createElement('p')
-            let text = message.toHtml()
-            p.textContent = `${text}`
-            history.append(p)
+            let p = message.toHtml()
+            history.innerHTML += p
         });
     }
 }
